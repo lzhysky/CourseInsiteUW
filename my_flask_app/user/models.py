@@ -79,3 +79,56 @@ class User(UserMixin, PkModel):
         }
 
 
+class Course(PkModel):
+    """A course offered in the system."""
+
+    __tablename__ = "course"
+
+    id = Column(db.Integer, primary_key=True, autoincrement=True)
+    course_name = Column(db.String(255), nullable=False)
+    course_description = Column(db.String(25500), nullable=True)
+    course_code = Column(db.String(255), unique=True, nullable=False)
+    course_link = Column(db.String(2550), nullable=True)
+    semester = Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return f"<Course({self.id!r}, {self.course_name!r})>"
+
+    def to_dict(self):
+        """Convert Course object to dictionary."""
+        return {
+            "id": self.id,
+            "course_name": self.course_name,
+            "course_description": self.course_description,
+            "course_code": self.course_code,
+            "course_link": self.course_link,
+            "semester": self.semester
+        }
+
+class Feedback(PkModel):
+    """A course offered in the system."""
+
+    __tablename__ = "feedback"
+
+    id = Column(db.Integer, primary_key=True, autoincrement=True)
+    course_id = Column(db.Integer, nullable=False)
+    feedback = Column(db.String(25500), nullable=True)
+    user_id = Column(db.Integer, unique=True, nullable=False)
+    course_name = Column(db.String(255))
+    username = Column(db.String(255))
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return f"<Course({self.id!r}, {self.course_name!r})>"
+
+    def to_dict(self):
+        """Convert Course object to dictionary."""
+        return {
+            "id": self.id,
+            "course_id": self.course_id,
+            "feedback": self.feedback,
+            "user_id": self.user_id,
+            "course_name": self.course_name,
+            "username": self.username
+        }
+

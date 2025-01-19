@@ -44,6 +44,28 @@ class RegisterForm(FlaskForm):
             return False
         return True
 
+class FeedbackForm(FlaskForm):
+    """Register form."""
+
+    course_name = StringField(
+        "course_name"
+    )
+    feedback = StringField(
+        "feedback"
+    )
+    username = PasswordField(
+        "username"
+    )
+
+    def __init__(self, *args, **kwargs):
+        """Create instance."""
+        super(FeedbackForm, self).__init__(*args, **kwargs)
+        self.user = None
+
+    def validate(self, **kwargs):
+        """Validate the form."""
+        return True
+
 
 class RegisterFormUW(FlaskForm):
     """Register form."""
